@@ -1,6 +1,7 @@
 package com.vsan.todo.app.service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,8 +22,11 @@ public class ToDoServices {
 	
 	//Create ToDo - Update
 	public ToDo createToDo(ToDo todo) {
+		LocalDate data = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EE, dd-MMMM-yyyy");
+		String dataCreazione = data.format(formatter);
 		//setto la data di creazione;
-		todo.setCreationDate(LocalDateTime.now());
+		todo.setCreationDate(dataCreazione);
 		//salvo nel db;
 		repository.save(todo);
 		return todo;
@@ -65,10 +69,18 @@ public class ToDoServices {
 		
 	}
 	
-	public void completeToDo(ToDo todo) {
-		if(todo.isCompleted() == false) {
-			todo.setCompleted(true);
+	public void completeToDo(Long id) {
+		List <ToDo> todoList = repository.findAll();
+		for(ToDo t : todoList) {
+			if(t.getId() == id) {
+				if(t.isCompleted() == false) {
+					t.setCompleted(true);
+				}
+			}
 		}
+			
+		
+		
 	}
 
 }

@@ -3,6 +3,7 @@ package com.vsan.todo.app.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,15 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vsan.todo.app.dao.ToDo;
+import com.vsan.todo.app.repository.ToDoRepo;
 import com.vsan.todo.app.service.ToDoServices;
 
 
 @RestController
 @RequestMapping("/vsan/todo-app")
+@CrossOrigin("*")
 public class ToDoController {
 	
 	@Autowired
 	private ToDoServices service;
+
 	
 	
 	@GetMapping("/todo")
@@ -45,6 +49,11 @@ public class ToDoController {
 	@DeleteMapping("/deleteToDo/{id}")
 	public void deleteToDo(@PathVariable("id") Long id) {
 		service.deleteToDo(id);
+	}
+	
+	@PostMapping("/completed/{id}")
+	public void completedItem(@PathVariable("id") Long id) {
+		service.completeToDo(id);
 	}
 	
 

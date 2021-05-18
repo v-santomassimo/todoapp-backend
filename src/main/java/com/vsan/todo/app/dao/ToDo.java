@@ -30,8 +30,7 @@ public class ToDo {
 	
 	private String description;
 	
-	//@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDateTime creationDate;
+	private String creationDate;
 	
 	private boolean isCompleted;
 	
