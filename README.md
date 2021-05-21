@@ -11,4 +11,4 @@ http://localhost:8080/vsan/todo-app/addToDo
 http://localhost:8080/vsan/todo-app/update
 
 # DELETE REQUEST
-http://localhost:8080/vsan/todo-app/deleteToDo/{ID} --> inserire id dell'item da eliminare;
+http://localhost:8080/vsan/todo-app/deleteToDo/ { ID } --> inserire id dell'item da eliminare;
