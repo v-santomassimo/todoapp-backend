@@ -32,7 +32,9 @@ public class ToDoController {
 	
 	@GetMapping("/todo")
 	public List<ToDo> getToDoItems(){
+		log.info("Fetching items...");
 		List<ToDo> items = service.readToDos();
+		log.info("Fetch done");
 		return items;
 	}
 	
@@ -46,17 +48,20 @@ public class ToDoController {
 	@PutMapping("/update")
 	public ToDo updateToDo(@RequestBody ToDo todo) {
 		ToDo newToDo = service.updateToDo(todo);
+		log.info("Item updated successfully");
 		return newToDo;
 	}
 	
 	@DeleteMapping("/deleteToDo/{id}")
 	public void deleteToDo(@PathVariable("id") Long id) {
 		service.deleteToDo(id);
+		log.info("Item deleted");
 	}
 	
 	@PostMapping("/completed/{id}")
 	public void completedItem(@PathVariable("id") Long id) {
 		service.completeToDo(id);
+		log.info("Item completed");
 	}
 	
 
