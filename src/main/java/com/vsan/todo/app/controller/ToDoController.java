@@ -17,7 +17,9 @@ import com.vsan.todo.app.dao.ToDo;
 import com.vsan.todo.app.repository.ToDoRepo;
 import com.vsan.todo.app.service.ToDoServices;
 
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @RestController
 @RequestMapping("/vsan/todo-app")
 @CrossOrigin("*")
@@ -35,9 +37,10 @@ public class ToDoController {
 	}
 	
 	@PostMapping("/addToDo")
-	public String addToDo(@RequestBody ToDo newTodo) {
+	public ToDo addToDo(@RequestBody ToDo newTodo) {
 		ToDo todo = service.createToDo(newTodo);
-		return "Item added correctly"; 
+		log.info("Item added correctly");
+		return todo; 
 	}
 	
 	@PutMapping("/update")
