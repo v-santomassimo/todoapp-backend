@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vsan.todo.app.dao.ToDo;
-import com.vsan.todo.app.repository.ToDoRepo;
 import com.vsan.todo.app.service.ToDoServices;
 
 import lombok.extern.log4j.Log4j2;
