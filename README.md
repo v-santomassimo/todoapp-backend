@@ -4,6 +4,9 @@ Applicativo Spring Boot con servizi CRUD, db  H2 file based.
 # GET REQUEST
 http://localhost:8080/vsan/todo-app/todo
 
+# GET REQUEST
+http://localhost:8080/vsan/todo-app/completed/ {ID}
+
 # POST REQUEST
 http://localhost:8080/vsan/todo-app/addToDo
 
