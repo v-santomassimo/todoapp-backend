@@ -12,8 +12,11 @@ import org.springframework.stereotype.Service;
 import com.vsan.todo.app.dao.ToDo;
 import com.vsan.todo.app.repository.ToDoRepo;
 
+import lombok.extern.log4j.Log4j2;
+
 
 @Service
+@Log4j2
 public class ToDoServices {
 	
 	@Autowired
@@ -23,7 +26,7 @@ public class ToDoServices {
 	//Create ToDo - Update
 	public ToDo createToDo(ToDo todo) {
 		LocalDate data = LocalDate.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EE, dd-MMMM-yyyy");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EE, dd MMMM yyyy");
 		String dataCreazione = data.format(formatter);
 		//setto la data di creazione;
 		todo.setCreationDate(dataCreazione);
@@ -57,7 +60,8 @@ public class ToDoServices {
 			// salvo l'item modificato
 			repository.save(updatedToDo);
 		} else {
-			createToDo(todo);
+			log.error("Todo not present");
+			return null;
 		}
 		return updatedToDo;
 	}
@@ -67,19 +71,13 @@ public class ToDoServices {
 	public void deleteToDo(Long id) {
 		repository.deleteById(id);
 		
+		
 	}
 	
-	public void completeToDo(Long id) {
-		List <ToDo> todoList = repository.findAll();
-		for(ToDo t : todoList) {
-			if(t.getId() == id) {
-				if(t.isCompleted() == false) {
-					t.setCompleted(true);
-				}
-			}
-		}
-			
-		
+	public void completeToDo(Long id) {			
+		ToDo todoCompleted = repository.findById(id).get();
+		todoCompleted.setCompleted(!todoCompleted.isCompleted());
+		repository.save(todoCompleted);
 		
 	}
 

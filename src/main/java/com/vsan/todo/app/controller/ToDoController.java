@@ -57,7 +57,7 @@ public class ToDoController {
 		log.info("Item deleted");
 	}
 	
-	@PostMapping("/completed/{id}")
+	@GetMapping("/completed/{id}")
 	public void completedItem(@PathVariable("id") Long id) {
 		service.completeToDo(id);
 		log.info("Item completed");
